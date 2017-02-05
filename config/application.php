@@ -3,7 +3,7 @@
 // the default, and should be changed as needed.
 return array(
 	'ServerAddress'				=> 'localhost',				// This value is the hostname:port under which Flux runs. (e.g., example.com or example.com:80)
-	'BaseURI'					=> '',						// The base URI is the base web root on which your application lies.
+	'BaseURI'					=> 'fluxcp',						// The base URI is the base web root on which your application lies.
 	'InstallerPassword'			=> 'secretpassword',		// Installer/updater password.
 	'RequireOwnership'			=> true,					// Require the executing user to be owner of the FLUX_ROOT/data/ directory tree? (Better for security)
 															// WARNING: This will be mostly IGNORED on non-POSIX-compliant OSes (e.g. Windows).
@@ -82,7 +82,7 @@ return array(
 	'EnableReCaptcha'			=> false,					// Enables the use of reCAPTCHA instead of Flux's native GD2 library (http://www.google.com/recaptcha)
 	'ReCaptchaPublicKey'		=> '...',					// This is your reCAPTCHA public key [REQUIRED FOR RECAPTCHA] (sign up at http://www.google.com/recaptcha)
 	'ReCaptchaPrivateKey'		=> '...',					// This is your reCAPTCHA private key [REQUIRED FOR RECAPTCHA] (sign up at http://www.google.com/recaptcha)
-	'ReCaptchaTheme'			=> 'white',					// ReCaptcha theme to use (see: http://code.google.com/apis/recaptcha/docs/customization.html#Standard_Themes)
+	'ReCaptchaTheme'			=> 'light',					// ReCaptcha theme to use (Value: dark or light) (see: https://developers.google.com/recaptcha/docs/display#render_param)
 	'DisplaySinglePages'		=> true,					// Whether or not to display paging for single page results.
 	'ForwardYears'				=> 15,						// (Visual) The number of years to display ahead of the current year in date inputs.
 	'BackwardYears'				=> 30,						// (Visual) The number of years to display behind the current year in date inputs.
@@ -101,6 +101,7 @@ return array(
 		//'admin2@localhost',								// -- This array may be empty if you only use one e-mail
 		//'admin3@localhost'								// -- because your Business Email is also checked.
 	),
+	'PaypalHackNotify'          => true,                    // Send email notification if hack attempt detected (Notification will be send for each address in list PayPalBusinessEmail and PayPalReceiverEmails)
 	'GStorageLeaderOnly'		=> false,					// Only allow guild leader to view guild storage rather than all members?
 	'DivorceKeepChild'			=> false,					// Keep child after divorce?
 	'DivorceKeepRings'			=> false,					// Keep wedding rings after divorce?
@@ -152,6 +153,7 @@ return array(
 	'AlchemistRankingLimit'		=> 20,						//
 	'BlacksmithRankingLimit'	=> 20,						//
 	'HomunRankingLimit'			=> 20,						//
+	'MVPRankingLimit'			=> 20,						//
 
 	'RankingHideGroupLevel'		=> AccountLevel::LOWGM,		//
 	'InfoHideZenyGroupLevel'	=> AccountLevel::LOWGM,		// Minimum group level of account to hide zeny from in server information page.
@@ -192,9 +194,8 @@ return array(
 	'CpChangeLogShowPassword'	=> false,					// Show password in CP "password changes" log (also see access.php's SeeCpChangePass).
 
 	'AdminMenuNewStyle'			=> true,					// Use new-style admin menu;  Applies to 'default' theme.
+	'EnablePeakDisplay'			=> true,					// Display Peak User count on Server Status page.
 	
-// Contact Form
-	'ContactFormEmail'			=> 'a@a.com',				// This email address is where you want the form submissions to be sent.
 	
 // News Options
 	'CMSNewsOnHomepage'			=> true,					// Display News on Home Page instead of "You've Just Installed FluxCP" message?
@@ -211,7 +212,7 @@ return array(
 	'FontPendingColour'			=>	'orange',
 	'FontClosedColour'			=>	'darkgrey',
 
-	// Discord Webhooks
+// Discord Webhooks
 	'DiscordUseWebhook'			=> false,
 	'DiscordWebhookURL'			=> 'enter_webhook_url_from_discord_here',
 	'DiscordSendOnRegister'			=> true,
@@ -233,7 +234,6 @@ return array(
 			'DownloadsLabel'		=> array('module' => 'pages','action'=>'content&path=downloads'),
 			'RulesLabel'			=> array('module' => 'pages','action'=>'content&path=rules'),
 			// End sample items for pages function.
-			'ContactUsLabel'	=> array('module' => 'contactform'),
 		),
 		'AccountLabel'		=> array(
 			'AccountCreateHeading'		=> array('module' => 'account', 'action' => 'create'),
@@ -372,6 +372,7 @@ return array(
 			'alchemist'		=> 'Alchemists',
 			'blacksmith'	=> 'Blacksmiths',
 			'homunculus'	=> 'Homunculus',
+			'mvp'			=> 'MVPs',
 			'guild'			=> 'Guilds',
 			'zeny'			=> 'Zeny'
 		),
@@ -497,7 +498,7 @@ return array(
 		'ChangeEmailTable'		=> 'cp_emailchange',
 		'LoginLogTable'			=> 'cp_loginlog',
 		'ChangePasswordTable'	=> 'cp_pwchange',
-		'OnlinePeak'			=> 'cp_onlinepeak',
+		'OnlinePeakTable'		=> 'cp_onlinepeak',
 		'CMSNewsTable'			=> 'cp_cmsnews',
 		'CMSPagesTable'			=> 'cp_cmspages',
 		'CMSSettingsTable'		=> 'cp_cmssettings',
